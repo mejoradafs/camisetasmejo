@@ -16,7 +16,7 @@
 
         <div id="resumen-pedido"></div>
 
-        <form id="formulario-pedido" action="https://formsubmit.co/camismejo@proton.me" method="POST">
+        <form id="formulario-pedido" method="POST">
             <label>Nombre:
                 <input type="text" name="nombre" required>
             </label>
@@ -26,6 +26,7 @@
             <label>Teléfono:
                 <input type="tel" name="telefono" required>
             </label>
+
             <input type="hidden" name="pedido_detalle" id="pedido_detalle">
             <input type="hidden" name="_subject" value="Nuevo pedido Mejorada FC">
             <input type="hidden" name="_captcha" value="false">
@@ -42,4 +43,3 @@
     <script src="pedido.js"></script>
 </body>
 </html>
-
