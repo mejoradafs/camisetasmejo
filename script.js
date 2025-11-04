@@ -16,6 +16,7 @@ function toggleNumero(tipo) {
 }
 
 function limitarNumero(input) {
+    if (input.value === "") return; // permite borrar temporalmente
     let value = parseInt(input.value);
     if (isNaN(value) || value < 1) {
         input.value = 1;
@@ -23,6 +24,7 @@ function limitarNumero(input) {
         input.value = 99;
     }
 }
+
 
 function obtenerNumero(tipo) {
     const check = document.getElementById(`sin-dorsal-${tipo}`);
@@ -88,3 +90,4 @@ function irAPedido() {
 document.querySelectorAll('.num-input').forEach(input => {
     input.addEventListener('input', () => limitarNumero(input));
 });
+
