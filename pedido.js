@@ -1,8 +1,9 @@
-
+// Recuperar el carrito guardado
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 const resumen = document.getElementById('resumen-pedido');
 let total = 0;
 
+// Mostrar resumen del pedido
 if (carrito.length === 0) {
     resumen.innerHTML = "<p>No hay productos en el carrito.</p>";
 } else {
@@ -26,10 +27,33 @@ if (carrito.length === 0) {
     resumen.appendChild(totalP);
 }
 
+// Guardar el detalle del pedido para enviarlo por correo
 document.getElementById('pedido_detalle').value = carrito.map(item => {
     return `${item.nombre} - Talla ${item.talla} - ${item.numeroCamiseta} - ${item.precio.toFixed(2)} €`;
 }).join('\n') + `\n\nTotal: ${total.toFixed(2)} €`;
 
-document.getElementById('formulario-pedido').addEventListener('submit', () => {
-    localStorage.removeItem('carrito');
+// Escuchar el envío del formulario
+document.getElementById('formulario-pedido').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+        // Enviar los datos a FormSubmit sin salir de la página
+        await fetch("https://formsubmit.co/ajax/camismejo@proton.me", {
+            method: "POST",
+            body: formData
+        });
+
+        // Vaciar el carrito
+        localStorage.removeItem('carrito');
+
+        // Redirigir a la página de agradecimiento
+        window.location.href = "gracias.html";
+
+    } catch (error) {
+        alert("Ocurrió un error al enviar el pedido. Por favor, inténtalo de nuevo.");
+        console.error(error);
+    }
 });
