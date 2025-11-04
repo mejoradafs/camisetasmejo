@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido - Mejorada FC</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Mejorada FC</div>
+    </header>
+
+    <section class="pedido">
+        <h2>Finaliza tu pedido</h2>
+
+        <div id="resumen-pedido"></div>
+
+        <form id="formulario-pedido" method="POST">
+            <label>Nombre:
+                <input type="text" name="nombre" required>
+            </label>
+            <label>Apellido:
+                <input type="text" name="apellido" required>
+            </label>
+            <label>Teléfono:
+                <input type="tel" name="telefono" required>
+            </label>
+
+            <input type="hidden" name="pedido_detalle" id="pedido_detalle">
+            <input type="hidden" name="_subject" value="Nuevo pedido Mejorada FC">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <button type="submit" class="btn-enviar">Enviar Pedido</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 Mejorada FC - Tienda Oficial</p>
+    </footer>
+
+    <script src="pedido.js"></script>
+</body>
+</html>

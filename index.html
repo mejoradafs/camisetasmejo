@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Oficial Mejorada FS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">Mejorada FS</div>
+            <img src="escudo.png" alt="Escudo del Mejorada FS" class="escudo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Camisetas</a></li>
+            </ul>
+        </nav>
+        <div class="carrito">
+            🛒 <span id="contador-carrito">0</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Tienda Oficial del Mejorada FS</h1>
+        <p>Compra las camisetas oficiales de la temporada 2025/26</p>
+    </section>
+
+    <section class="productos">
+        <h2>Colección 2025/26</h2>
+        <div class="grid">
+
+            <!-- CAMISETA AZUL -->
+            <div class="producto">
+                <img src="primera_jugador.jpg" alt="Camiseta Azul Mejorada FS">
+                <h3>Camiseta Azul</h3>
+                <p>30 €</p>
+
+                <div class="opciones">
+                    <label>Talla:
+                        <select id="talla-Azul">
+                            <optgroup label="Niño">
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="14">14</option>
+                            </optgroup>
+                            <optgroup label="Adulto">
+                                <option value="S">S</option>
+                                <option value="M" selected>M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </optgroup>
+                        </select>
+                    </label>
+
+                    <label class="num-label">Número:
+                        <input class="num-input" type="number" id="num-Azul" min="1" max="99" placeholder="Ej: 10">
+                    </label>
+                    <label class="sin-dorsal">
+                        <input type="checkbox" id="sin-dorsal-Azul" onchange="toggleNumero('Azul')"> Sin dorsal
+                    </label>
+                </div>
+
+                <button onclick="agregarAlCarrito('Camiseta Azul', 30, obtenerNumero('Azul'), document.getElementById('talla-Azul').value)">
+                    Agregar al carrito
+                </button>
+            </div>
+
+            <!-- CAMISETA ROJA -->
+            <div class="producto">
+                <img src="segunda_jugador.jpg" alt="Camiseta Roja Mejorada FS">
+                <h3>Camiseta Roja</h3>
+                <p>30 €</p>
+
+                <div class="opciones">
+                    <label>Talla:
+                        <select id="talla-Roja">
+                            <optgroup label="Niño">
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="14">14</option>
+                            </optgroup>
+                            <optgroup label="Adulto">
+                                <option value="S">S</option>
+                                <option value="M" selected>M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </optgroup>
+                        </select>
+                    </label>
+
+                    <label class="num-label">Número:
+                        <input class="num-input" type="number" id="num-Roja" min="1" max="99" placeholder="Ej: 7">
+                    </label>
+                    <label class="sin-dorsal">
+                        <input type="checkbox" id="sin-dorsal-Roja" onchange="toggleNumero('Roja')"> Sin dorsal
+                    </label>
+                </div>
+
+                <button onclick="agregarAlCarrito('Camiseta Roja', 30, obtenerNumero('Roja'), document.getElementById('talla-Roja').value)">
+                    Agregar al carrito
+                </button>
+            </div>
+
+            <!-- CAMISETA AMARILLA -->
+            <div class="producto">
+                <img src="primera_portero.jpg" alt="Camiseta Amarilla Mejorada FS">
+                <h3>Camiseta Amarilla</h3>
+                <p>30 €</p>
+
+                <div class="opciones">
+                    <label>Talla:
+                        <select id="talla-Amarilla">
+                            <optgroup label="Niño">
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="14">14</option>
+                            </optgroup>
+                            <optgroup label="Adulto">
+                                <option value="S">S</option>
+                                <option value="M" selected>M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </optgroup>
+                        </select>
+                    </label>
+
+                    <label class="num-label">Número:
+                        <input class="num-input" type="number" id="num-Amarilla" min="1" max="99" placeholder="Ej: 1">
+                    </label>
+                    <label class="sin-dorsal">
+                        <input type="checkbox" id="sin-dorsal-Amarilla" onchange="toggleNumero('Amarilla')"> Sin dorsal
+                    </label>
+                </div>
+
+                <button onclick="agregarAlCarrito('Camiseta Amarilla', 30, obtenerNumero('Amarilla'), document.getElementById('talla-Amarilla').value)">
+                    Agregar al carrito
+                </button>
+            </div>
+
+            <!-- CAMISETA BLANCA -->
+            <div class="producto">
+                <img src="segunda_portero.jpg" alt="Camiseta Blanca Mejorada FS">
+                <h3>Camiseta Blanca</h3>
+                <p>30 €</p>
+
+                <div class="opciones">
+                    <label>Talla:
+                        <select id="talla-Blanca">
+                            <optgroup label="Niño">
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="14">14</option>
+                            </optgroup>
+                            <optgroup label="Adulto">
+                                <option value="S">S</option>
+                                <option value="M" selected>M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </optgroup>
+                        </select>
+                    </label>
+
+                    <label class="num-label">Número:
+                        <input class="num-input" type="number" id="num-Blanca" min="1" max="99" placeholder="Ej: 13">
+                    </label>
+                    <label class="sin-dorsal">
+                        <input type="checkbox" id="sin-dorsal-Blanca" onchange="toggleNumero('Blanca')"> Sin dorsal
+                    </label>
+                </div>
+
+                <button onclick="agregarAlCarrito('Camiseta Blanca', 30, obtenerNumero('Blanca'), document.getElementById('talla-Blanca').value)">
+                    Agregar al carrito
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="carrito-detalle">
+        <h2>Tu Carrito</h2>
+        <ul id="lista-carrito"></ul>
+        <p id="total">Total: 0 €</p>
+        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+        <button id="continuar-pedido" onclick="irAPedido()" style="display:none;">Continuar Pedido</button>
+    </section>
+
+    <footer>
+        <p>© 2025 Mejorada FC - Tienda Oficial</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
