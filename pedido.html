@@ -21,7 +21,7 @@
 
     <div id="resumen-pedido"></div>
 
-    <!-- FORMULARIO Formspree con JS para redirigir a gracias.html -->
+    <!-- Formulario Formspree -->
     <form id="formulario-pedido" method="POST" action="https://formspree.io/f/xeovqrvj">
       <label>Nombre:
         <input type="text" name="nombre" required>
@@ -47,7 +47,7 @@
   </footer>
 
   <script>
-    // Recuperar carrito
+    // Recuperar carrito guardado en localStorage
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const resumen = document.getElementById('resumen-pedido');
     let total = 0;
@@ -75,14 +75,15 @@
       resumen.appendChild(totalP);
     }
 
-    // Guardar detalle del pedido
+    // Guardar detalle del pedido en el input hidden
     document.getElementById('pedido_detalle').value = carrito.map(item => {
       return `${item.nombre} - Talla: ${item.talla || "-"} - Dorsal: ${item.numeroCamiseta || "-"} - ${item.precio.toFixed(2)} €`;
     }).join('\n') + `\n\nTotal: ${total.toFixed(2)} €`;
 
-    // Enviar formulario con redirección a gracias.html
+    // Interceptar el submit para enviar con fetch y redirigir
     document.getElementById('formulario-pedido').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const form = e.target;
       const formData = new FormData(form);
 
