@@ -21,6 +21,7 @@
 
     <div id="resumen-pedido"></div>
 
+    <!-- FORMULARIO Formspree con JS para redirigir a gracias.html -->
     <form id="formulario-pedido" method="POST" action="https://formspree.io/f/xeovqrvj">
       <label>Nombre:
         <input type="text" name="nombre" required>
@@ -34,6 +35,7 @@
 
       <input type="hidden" name="pedido_detalle" id="pedido_detalle">
       <input type="hidden" name="_subject" value="Nuevo pedido Mejorada FS">
+      <input type="hidden" name="_replyto" value="camismejo@proton.me">
 
       <button type="submit" class="btn-enviar">Enviar Pedido</button>
       <button type="button" class="boton-volver" onclick="history.back()">Volver atrás</button>
@@ -45,7 +47,7 @@
   </footer>
 
   <script>
-    // Recuperar el carrito guardado
+    // Recuperar carrito
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const resumen = document.getElementById('resumen-pedido');
     let total = 0;
@@ -78,13 +80,32 @@
       return `${item.nombre} - Talla: ${item.talla || "-"} - Dorsal: ${item.numeroCamiseta || "-"} - ${item.precio.toFixed(2)} €`;
     }).join('\n') + `\n\nTotal: ${total.toFixed(2)} €`;
 
-    // Opcional: enviar por AJAX y vaciar carrito al enviar
+    // Enviar formulario con redirección a gracias.html
     document.getElementById('formulario-pedido').addEventListener('submit', async (e) => {
-      // e.preventDefault(); // descomenta si quieres enviar por AJAX
-      // localStorage.removeItem('carrito'); // vaciar carrito
-      // window.location.href = "gracias.html"; // redirigir después
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+
+      try {
+        await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        // Vaciar carrito
+        localStorage.removeItem('carrito');
+
+        // Redirigir a gracias.html
+        window.location.href = "gracias.html";
+
+      } catch (error) {
+        alert("Ocurrió un error al enviar el pedido. Por favor, inténtalo de nuevo.");
+        console.error(error);
+      }
     });
   </script>
 </body>
 </html>
-
