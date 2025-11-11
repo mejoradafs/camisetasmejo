@@ -21,8 +21,7 @@
 
     <div id="resumen-pedido"></div>
 
-    <!-- Formulario clásico apuntando a FormSubmit -->
-    <form id="formulario-pedido" action="https://formsubmit.co/camismejo@proton.me" method="POST">
+    <form id="formulario-pedido" method="POST" action="https://formspree.io/f/tu_endpoint_aqui">
       <label>Nombre:
         <input type="text" name="nombre" required>
       </label>
@@ -33,12 +32,8 @@
         <input type="tel" name="telefono" required>
       </label>
 
-      <!-- Detalle del pedido -->
       <input type="hidden" name="pedido_detalle" id="pedido_detalle">
-
-      <!-- Redirección después del envío -->
-      <input type="hidden" name="_next" value="gracias.html">
-      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Nuevo pedido Mejorada FS">
 
       <button type="submit" class="btn-enviar">Enviar Pedido</button>
       <button type="button" class="boton-volver" onclick="history.back()">Volver atrás</button>
@@ -49,6 +44,46 @@
     <p>© 2025 Mejorada FS - Tienda Oficial</p>
   </footer>
 
-  <script src="pedido.js"></script>
+  <script>
+    // Recuperar el carrito guardado
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const resumen = document.getElementById('resumen-pedido');
+    let total = 0;
+
+    if (carrito.length === 0) {
+      resumen.innerHTML = "<p>No hay productos en el carrito.</p>";
+    } else {
+      resumen.innerHTML = "<h3>Tus productos seleccionados:</h3>";
+      carrito.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add("item-pedido");
+        div.innerHTML = `
+          <p><strong>${item.nombre}</strong></p>
+          <p>Talla: ${item.talla || "-"}</p>
+          <p>Dorsal: ${item.numeroCamiseta || "-"}</p>
+          <p>Precio: ${item.precio.toFixed(2)} €</p>
+        `;
+        resumen.appendChild(div);
+        total += item.precio;
+      });
+
+      const totalP = document.createElement('p');
+      totalP.classList.add("total-pedido");
+      totalP.innerHTML = `<strong>Total a pagar: ${total.toFixed(2)} €</strong>`;
+      resumen.appendChild(totalP);
+    }
+
+    // Guardar detalle del pedido
+    document.getElementById('pedido_detalle').value = carrito.map(item => {
+      return `${item.nombre} - Talla: ${item.talla || "-"} - Dorsal: ${item.numeroCamiseta || "-"} - ${item.precio.toFixed(2)} €`;
+    }).join('\n') + `\n\nTotal: ${total.toFixed(2)} €`;
+
+    // Opcional: enviar por AJAX y vaciar carrito al enviar
+    document.getElementById('formulario-pedido').addEventListener('submit', async (e) => {
+      // e.preventDefault(); // descomenta si quieres enviar por AJAX
+      // localStorage.removeItem('carrito'); // vaciar carrito
+      // window.location.href = "gracias.html"; // redirigir después
+    });
+  </script>
 </body>
 </html>
