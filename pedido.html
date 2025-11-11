@@ -21,7 +21,8 @@
 
     <div id="resumen-pedido"></div>
 
-    <form id="formulario-pedido" method="POST">
+    <!-- Formulario clásico apuntando a FormSubmit -->
+    <form id="formulario-pedido" action="https://formsubmit.co/camismejo@proton.me" method="POST">
       <label>Nombre:
         <input type="text" name="nombre" required>
       </label>
@@ -35,10 +36,9 @@
       <!-- Detalle del pedido -->
       <input type="hidden" name="pedido_detalle" id="pedido_detalle">
 
-      <!-- Configuración de correo y redirección -->
-      <input type="hidden" name="_subject" value="Nuevo pedido Mejorada FS">
+      <!-- Redirección después del envío -->
+      <input type="hidden" name="_next" value="gracias.html">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
 
       <button type="submit" class="btn-enviar">Enviar Pedido</button>
       <button type="button" class="boton-volver" onclick="history.back()">Volver atrás</button>
