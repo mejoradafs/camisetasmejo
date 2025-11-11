@@ -28,45 +28,12 @@ if (carrito.length === 0) {
   resumen.appendChild(totalP);
 }
 
-// Guardar detalle del pedido en input oculto
+// Guardar detalle del pedido en input oculto para FormSubmit
 document.getElementById('pedido_detalle').value = carrito.map(item => {
   return `${item.nombre} - Talla: ${item.talla || "-"} - Dorsal: ${item.numeroCamiseta || "-"} - ${item.precio.toFixed(2)} €`;
 }).join('\n') + `\n\nTotal: ${total.toFixed(2)} €`;
 
-// Servicios de envío: todos apuntando a camismejo@proton.me
-const servicios = [
-  { url: "https://formsubmit.co/ajax/camismejo@proton.me" },   // FormSubmit
-  { url: "https://formspree.io/f/camismejo@proton.me" },       // Formspree
-  { url: "https://getform.io/f/camismejo@proton.me" }          // Getform
-];
-
-// Enviar formulario con redundancia
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
-  let enviado = false;
-
-  for (let servicio of servicios) {
-    try {
-      const res = await fetch(servicio.url, {
-        method: "POST",
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (res.ok) {
-        enviado = true;
-        localStorage.removeItem('carrito'); // Vaciar carrito
-        window.location.href = "gracias.html"; // Redirigir a página de gracias
-        break;
-      }
-    } catch (err) {
-      console.warn("Error enviando a", servicio.url, err);
-      // Si falla, pasa al siguiente servicio
-    }
-  }
-
-  if (!enviado) {
-    alert("Ocurrió un error al enviar el pedido. Por favor, inténtalo de nuevo más tarde.");
-  }
+// Vaciar carrito al enviar el formulario
+form.addEventListener('submit', () => {
+  localStorage.removeItem('carrito');
 });
